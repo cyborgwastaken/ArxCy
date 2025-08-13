@@ -37,7 +37,7 @@ You will need the following tools installed on your system:
 
 1.  **Clone the repository:**
     ```sh
-    git clone [https://github.com/cyborgwastaken/ArxCy.git](https://github.com/cyborgwastaken/ArxCy.git)
+    git clone https://github.com/cyborgwastaken/ArxCy.git
     cd ArxCy
     ```
 
