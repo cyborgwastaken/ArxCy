@@ -1,5 +1,5 @@
 
-# ArxCy Language Transpiler
+# A.R.X.Cy - Abstract Render X-Framework by Cyborg
 
 A simple, educational transpiler for the ArxCy language, built with C++ and ANTLR4. This project takes source code written in ArxCy (`.arx` files) and translates it into standard C code.
 
