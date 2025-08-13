@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArxCy Language Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- 
+        Chosen Palette: Minty Slate
+        Application Structure Plan: A two-column layout with a sticky navigation sidebar on the left and a scrollable main content area on the right. This is a standard, intuitive pattern for documentation, allowing users to easily jump between topics. Key interactions are smooth scrolling, active navigation link highlighting, and a 'copy to clipboard' feature for code examples to enhance usability.
+        Visualization & Content Choices: The source is text-based documentation. Goal: Inform/Organize. Method: Structured HTML (sections, headings, tables, code blocks) styled with Tailwind. Interaction: JS-powered smooth scrolling, active nav highlighting, and copy-to-clipboard buttons. Justification: This structure directly translates the source document into a familiar and interactive web format without needing data visualizations like charts, as there is no quantitative data.
+        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        pre, code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .active-nav {
+            color: #0ea5e9; /* sky-500 */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row">
+        <!-- Left Sidebar Navigation -->
+        <aside class="w-full md:w-64 lg:w-72 md:sticky top-0 md:h-screen p-6 md:p-8 border-b md:border-b-0 md:border-r border-slate-200 bg-white md:bg-transparent">
+            <h1 class="text-2xl font-bold text-sky-600">ArxCy Docs</h1>
+            <p class="text-sm text-slate-500 mt-1">Language Reference</p>
+            <nav class="mt-8">
+                <ul id="nav-links" class="space-y-3">
+                    <li><a href="#comments" class="text-slate-600 hover:text-sky-500 transition-colors duration-200">1. Comments</a></li>
+                    <li><a href="#data-types" class="text-slate-600 hover:text-sky-500 transition-colors duration-200">2. Data Types</a></li>
+                    <li><a href="#variables" class="text-slate-600 hover:text-sky-500 transition-colors duration-200">3. Variables</a></li>
+                    <li><a href="#operators" class="text-slate-600 hover:text-sky-500 transition-colors duration-200">4. Operators</a></li>
+                    <li><a href="#control-flow" class="text-slate-600 hover:text-sky-500 transition-colors duration-200">5. Control Flow</a></li>
+                    <li><a href="#arrays-in-depth" class="text-slate-600 hover:text-sky-500 transition-colors duration-200">6. Arrays In-Depth</a></li>
+                    <li><a href="#built-in-functions" class="text-slate-600 hover:text-sky-500 transition-colors duration-200">7. Built-in Functions</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Right Content Area -->
+        <main class="flex-1 p-6 md:p-12">
+            <div class="prose max-w-none">
+                <header>
+                    <h1 class="text-4xl font-bold tracking-tight text-slate-900">ArxCy Language Documentation</h1>
+                    <p class="mt-4 text-lg text-slate-600">Welcome to the official language documentation for ArxCy. This document serves as a comprehensive reference for the syntax, data types, and features of the language.</p>
+                </header>
+
+                <section id="comments" class="pt-16 scroll-mt-16">
+                    <h2 class="text-2xl font-semibold text-slate-900">1. Comments</h2>
+                    <p>ArxCy uses C-style single-line comments. Any text following a <code>//</code> on the same line is ignored by the transpiler.</p>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">// This is a single-line comment.
+int x = 10; // This is an inline comment.</code></pre>
+                    </div>
+                </section>
+
+                <section id="data-types" class="pt-16 scroll-mt-16">
+                    <h2 class="text-2xl font-semibold text-slate-900">2. Data Types</h2>
+                    <p>ArxCy is a statically-typed language. It supports several primitive data types and single-dimensional arrays.</p>
+                    <h3 class="text-xl font-semibold mt-6">Primitive Types</h3>
+                    <div class="overflow-x-auto mt-4">
+                        <table class="min-w-full border border-slate-200 rounded-lg">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="p-3 text-left text-sm font-semibold text-slate-700">Type</th>
+                                    <th class="p-3 text-left text-sm font-semibold text-slate-700">Description</th>
+                                    <th class="p-3 text-left text-sm font-semibold text-slate-700">Example Literal</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white">
+                                <tr><td class="p-3 border-t border-slate-200"><code>int</code></td><td class="p-3 border-t border-slate-200">A 32-bit signed integer.</td><td class="p-3 border-t border-slate-200"><code>42</code></td></tr>
+                                <tr><td class="p-3 border-t border-slate-200"><code>flt</code></td><td class="p-3 border-t border-slate-200">A floating-point number.</td><td class="p-3 border-t border-slate-200"><code>3.14</code></td></tr>
+                                <tr><td class="p-3 border-t border-slate-200"><code>char</code></td><td class="p-3 border-t border-slate-200">A single character.</td><td class="p-3 border-t border-slate-200"><code>'A'</code></td></tr>
+                                <tr><td class="p-3 border-t border-slate-200"><code>bool</code></td><td class="p-3 border-t border-slate-200">A boolean value.</td><td class="p-3 border-t border-slate-200"><code>true</code>, <code>false</code></td></tr>
+                                <tr><td class="p-3 border-t border-slate-200"><code>str</code></td><td class="p-3 border-t border-slate-200">A string of characters.</td><td class="p-3 border-t border-slate-200"><code>"Hello"</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-6">Arrays</h3>
+                    <p>Arrays are fixed-size, ordered collections of elements of the same type.</p>
+                    <ul class="list-disc pl-5 mt-2">
+                        <li><strong>Declaration:</strong> <code>type[] array_name;</code></li>
+                        <li><strong>Initialization:</strong> <code>type[] array_name = {value1, value2, ...};</code></li>
+                    </ul>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">// An array of integers
+int[] numbers = {10, 20, 30};
+
+// An array of booleans
+bool[] flags = {true, false, true};</code></pre>
+                    </div>
+                </section>
+
+                <section id="variables" class="pt-16 scroll-mt-16">
+                    <h2 class="text-2xl font-semibold text-slate-900">3. Variables</h2>
+                    <p>Variables must be declared with their type before they are used. They can be initialized at the time of declaration or assigned a value later.</p>
+                    <h3 class="text-xl font-semibold mt-6">Declaration & Initialization</h3>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">// Declaration without initialization
+int x;
+
+// Declaration with initialization
+str message = "Hello, ArxCy!";
+int[] my_array = {1, 2, 3};</code></pre>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-6">Assignment</h3>
+                    <p>The <code>=</code> operator is used to assign a new value to a variable.</p>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">int y = 10;
+y = 20; // Re-assigning the value of y
+
+int[] data = {1, 2, 3};
+data[0] = 100; // Assigning a new value to an array element</code></pre>
+                    </div>
+                </section>
+                
+                <section id="operators" class="pt-16 scroll-mt-16">
+                    <h2 class="text-2xl font-semibold text-slate-900">4. Operators</h2>
+                    <p>ArxCy supports a standard set of arithmetic, comparison, and logical operators.</p>
+                    <div class="overflow-x-auto mt-4">
+                         <table class="min-w-full border border-slate-200 rounded-lg">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="p-3 text-left text-sm font-semibold text-slate-700">Category</th>
+                                    <th class="p-3 text-left text-sm font-semibold text-slate-700">Operators</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white">
+                                <tr><td class="p-3 border-t border-slate-200"><strong>Arithmetic</strong></td><td class="p-3 border-t border-slate-200"><code>+</code> (Add), <code>-</code> (Subtract), <code>*</code> (Multiply), <code>/</code> (Divide), <code>%</code> (Modulo)</td></tr>
+                                <tr><td class="p-3 border-t border-slate-200"><strong>Comparison</strong></td><td class="p-3 border-t border-slate-200"><code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></td></tr>
+                                <tr><td class="p-3 border-t border-slate-200"><strong>Logical</strong></td><td class="p-3 border-t border-slate-200"><code>&&</code> (AND), <code>||</code> (OR), <code>!</code> (NOT)</td></tr>
+                                <tr><td class="p-3 border-t border-slate-200"><strong>Increment</strong></td><td class="p-3 border-t border-slate-200"><code>++</code> (Prefix and Postfix)</td></tr>
+                                <tr><td class="p-3 border-t border-slate-200"><strong>Decrement</strong></td><td class="p-3 border-t border-slate-200"><code>--</code> (Prefix and Postfix)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">int result = (10 + 5) * 2; // result is 30
+bool is_true = (result > 10) && !false; // is_true is true</code></pre>
+                    </div>
+                </section>
+
+                <section id="control-flow" class="pt-16 scroll-mt-16">
+                    <h2 class="text-2xl font-semibold text-slate-900">5. Control Flow</h2>
+                    <h3 class="text-xl font-semibold mt-6"><code>if / else-if / else</code> Statements</h3>
+                    <p>ArxCy uses an <code>if-then-else</code> structure for conditional logic. Code blocks must be enclosed in curly braces <code>{}</code>.</p>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">int score = 85;
+
+if (score >= 90) then {
+    print("Grade: A");
+} else-if (score >= 80) then {
+    print("Grade: B");
+} else {
+    print("Grade: C or lower");
+}</code></pre>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-6"><code>for</code> Loop</h3>
+                    <p>The <code>for</code> loop is ideal for iterating a known number of times.</p>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">// Prints numbers 0 through 4
+for (int i = 0; i < 5; i++) {
+    print(i);
+}</code></pre>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-6"><code>while</code> Loop</h3>
+                    <p>The <code>while</code> loop executes as long as its condition is true.</p>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">int counter = 3;
+while (counter > 0) {
+    print(counter);
+    counter--; // or --counter
+}</code></pre>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-6"><code>do-while</code> Loop</h3>
+                    <p>The <code>do-while</code> loop is similar to <code>while</code>, but its body is guaranteed to execute at least once.</p>
+                     <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">int x = 10;
+do {
+    print("This will print once.");
+} while (x < 10);</code></pre>
+                    </div>
+                </section>
+
+                <section id="arrays-in-depth" class="pt-16 scroll-mt-16">
+                    <h2 class="text-2xl font-semibold text-slate-900">6. Arrays In-Depth</h2>
+                    <h3 class="text-xl font-semibold mt-6">Accessing Elements</h3>
+                    <p>Array elements are accessed using zero-based indexing with square brackets <code>[]</code>.</p>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">int[] data = {10, 20, 30};
+print(data[0]); // Prints 10
+print(data[2]); // Prints 30</code></pre>
+                    </div>
+                    <h3 class="text-xl font-semibold mt-6"><code>.length</code> Property</h3>
+                    <p>You can get the number of elements in an array using the <code>.length</code> property. This is useful for writing safe loops.</p>
+                    <div class="code-block mt-4">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">int[] scores = {99, 87, 100, 91};
+
+print("The number of scores is: " + scores.length); // Prints 4
+
+// Loop through the array without hardcoding the size
+for (int i = 0; i < scores.length; i++) {
+    print(scores[i]);
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="built-in-functions" class="pt-16 scroll-mt-16">
+                    <h2 class="text-2xl font-semibold text-slate-900">7. Built-in Functions</h2>
+                    <h3 class="text-xl font-semibold mt-6"><code>print()</code></h3>
+                    <p>The <code>print()</code> function outputs a value to the console, followed by a newline.</p>
+                    <p class="font-semibold mt-4">Basic Usage:</p>
+                    <div class="code-block mt-2">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">print("Hello, World!");
+print(123);</code></pre>
+                    </div>
+                    <p class="font-semibold mt-4">String Concatenation:</p>
+                    <p>The <code>print</code> function has a special feature: it can concatenate a string literal with a single variable of another type using the <code>+</code> operator.</p>
+                    <div class="code-block mt-2">
+                        <pre class="bg-slate-100 p-4 rounded-lg text-sm"><code class="language-cpp">int age = 21;
+print("My age is: " + age); // Correctly prints "My age is: 21"
+
+flt pi = 3.14;
+print("PI is approx: " + pi); // Correctly prints "PI is approx: 3.140000"</code></pre>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add copy buttons to all code blocks
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                const pre = block.querySelector('pre');
+                if (pre) {
+                    const button = document.createElement('button');
+                    button.textContent = 'Copy';
+                    button.className = 'absolute top-2 right-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold py-1 px-2 rounded-md transition-colors';
+                    block.style.position = 'relative';
+                    block.appendChild(button);
+
+                    button.addEventListener('click', () => {
+                        const code = pre.querySelector('code').innerText;
+                        
+                        const textarea = document.createElement('textarea');
+                        textarea.value = code;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        try {
+                            document.execCommand('copy');
+                            button.textContent = 'Copied!';
+                            setTimeout(() => {
+                                button.textContent = 'Copy';
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Failed to copy text: ', err);
+                            button.textContent = 'Error';
+                        }
+                        document.body.removeChild(textarea);
+                    });
+                }
+            });
+
+            // Active nav link highlighting on scroll
+            const navLinks = document.querySelectorAll('#nav-links a');
+            const sections = document.querySelectorAll('main section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active-nav');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px" });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
