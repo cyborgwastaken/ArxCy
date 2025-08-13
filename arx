@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+# --- CONFIG ---
+PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BIN="$PROJECT_DIR/arx"
+ANTLR_LIB="$PROJECT_DIR"
+
+# --- CHECK ARG ---
+if [ -z "$1" ]; then
+    echo "[USAGE] arx <file.arx>"
+    exit 1
+fi
+
+INPUT_FILE="$1"
+
+# --- EXPORT DYLD PATH FOR MAC ---
+export DYLD_LIBRARY_PATH="$ANTLR_LIB:$DYLD_LIBRARY_PATH"
+
+# --- RUN COMPILER ---
+"$BIN" "$INPUT_FILE"
+
+# --- COMPILE GENERATED C FILE ---
+if [ -f "$PROJECT_DIR/output.c" ]; then
+    gcc "$PROJECT_DIR/output.c" -o "$PROJECT_DIR/output"
+    "$PROJECT_DIR/output"
+else
+    echo "[ERROR] output.c not found!"
+    exit 1
+fi
