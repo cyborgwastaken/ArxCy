@@ -1,0 +1,119 @@
+// =======================================
+// Comprehensive Test File for ArxCy v1.0
+// =======================================
+// This file tests all currently implemented features of the transpiler.
+
+// --- Section 1: Variable Declarations & Basic Printing ---
+print("--- Section 1: Variables & Basic Printing ---");
+int an_int = 42;
+flt a_float = 3.14;
+char a_char = 'A';
+bool a_bool = true;
+str a_string = "Hello, ArxCy!";
+
+print("Integer:");
+print(an_int);
+print("Float:");
+print(a_float);
+print("Char:");
+print(a_char);
+// Note: Printing a boolean will result in 1 for true, 0 for false in C.
+print("Boolean (1 for true):");
+print(a_bool);
+print("String:");
+print(a_string);
+
+// ---
+
+// --- Section 2: Expressions & Arithmetic ---
+print("--- Section 2: Expressions & Arithmetic ---");
+int x = 10;
+int y = 4;
+int result = (x + y) * 2;
+print("Result of (10 + 4) * 2 is:");
+print(result);
+
+print("10 / 4 is:");
+print(x / y); // Integer division
+
+print("10 % 4 is:");
+print(x % y); // Modulo
+
+// ---
+
+// --- Section 3: Arrays ---
+print("--- Section 3: Arrays ---");
+int[] int_array = {100, 201, 302};
+bool[] bool_array = {true, false, true};
+
+int n = int_array.length;
+
+print("Accessing integer array element 1:");
+print(int_array[1]); // Should print 201
+
+// ---
+
+// --- Section 4: Control Flow - Conditionals ---
+print("--- Section 4: Conditionals ---");
+if (a_bool) then {
+    print("If statement: a_bool is true.");
+}
+
+if (10 < 5) then {
+    print("This should NOT print.");
+} else {
+    print("Else statement: 10 is not less than 5.");
+}
+
+int z = 0;
+if (z == 1 && a_bool) then {
+    print("This should NOT print (&&).");
+} else-if (z == 0 || false) then {
+    print("Else-if statement: z is 0 OR false is false (||).");
+} else {
+    print("This should NOT print (final else).");
+}
+
+if (!false) then {
+    print("Negation !false is true.");
+}
+
+// ---
+
+// --- Section 5: Control Flow - Loops ---
+print("--- Section 5: Loops ---");
+print("For loop with postfix i++:");
+for (int i = 0; i < 3; i++) {
+    print(i);
+}
+
+print("While loop with prefix ++j:");
+int j = 0;
+while (j < 3) {
+    print(j);
+    ++j;
+}
+
+print("Do-while loop (prints at least once):");
+int k = 5;
+do {
+    print("k is 5, but this prints once.");
+    k++;
+} while (k < 5);
+
+print("Looping through an array:");
+for (int i = 0; i < 3; i++) {
+    print(int_array[i]);
+}
+
+// ---
+
+// --- Section 6: Advanced Printing (Concatenation) ---
+print("--- Section 6: Concatenation in Print ---");
+int age = 21;
+print("My age is: " + age);
+
+flt pi_val = 3.14159;
+print("The value of PI is approx: " + pi_val);
+
+print("--- Test Complete ---");
